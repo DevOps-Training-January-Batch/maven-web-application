@@ -28,15 +28,19 @@ stage('UploadArtifcatsIntoNexus'){
 sh "$mavenHome/bin/mvn deploy"
 }
 
+/*
 //Deploy App into Tomcat Server
 stage('DeployAppIntoTomcat'){
-/*sshagent(['3a36aa90-f625-49e9-8aaf-9a217f4c631d']) {
+sshagent(['3a36aa90-f625-49e9-8aaf-9a217f4c631d']) {
    sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@13.234.59.231:/opt/apache-tomcat-9.0.59/webapps"
 }
 // sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@13.234.59.231:/opt/apache-tomcat-9.0.59/webapps"
 
+}
+*/
+
+stage('DeployAppIntoTomcat'){
 deploy adapters: [tomcat9(credentialsId: '93a26961-1fe8-424a-8ca5-915aee592d05', path: '', url: 'http://13.234.59.231:9988/')], contextPath: '/website2', war: '**/*.war'
 }
-
 
 }//Node Closing
