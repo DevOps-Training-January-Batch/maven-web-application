@@ -4,7 +4,7 @@ buildName 'DevServer-${BUILD_NUMBER}'
 echo "The Node name is:  ${env.NODE_NAME} "
 echo "The Job name is:  ${env.JOB_NAME} "
 echo " The Build number is: ${env.BUILD_NUMBER}  "
-
+properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '15', daysToKeepStr: '', numToKeepStr: '15')), gitLabConnection(gitLabConnection: 'Gitlab.com_Credentials', jobCredentialId: ''), [$class: 'JobLocalConfiguration', changeReasonComment: ''], pipelineTriggers([githubPush()])])
 //Checkout Stage
 stage('CheckoutCode'){
  
